@@ -112,6 +112,54 @@
     	
     	<profile>
     		<id>jboss-managed</id>
+    		<build>
+	    		<plugins>
+	    			<plugin>
+	    				 <artifactId>maven-dependency-plugin</artifactId>
+	    				 <executions>
+	    				 	<execution>
+	    				 		<id>unpack</id>
+			                    <phase>process-test-classes</phase>
+			                    <goals>
+			                        <goal>unpack</goal>
+			                    </goals>
+			                    <configuration>
+			                    	<artifactItems>
+			                    		<!--  artifactItem>
+			                                <groupId>org.jboss.as</groupId>
+			                                <artifactId>jboss-as-dist</artifactId>
+			                                <version>7.1.1.Final</version>
+			                                <type>zip</type>
+			                                <overWrite>false</overWrite>
+			                                <outputDirectory>target</outputDirectory>
+			                            </artifactItem -->
+			                            <artifactItem>
+			                                <groupId>org.wildfly</groupId>
+			                                <artifactId>wildfly-dist</artifactId>
+			                                <version>9.0.1.Final</version>
+			                                <type>zip</type>
+			                                <overWrite>false</overWrite>
+			                                <outputDirectory>target</outputDirectory>
+			                            </artifactItem>
+			                    	</artifactItems>
+			                    </configuration>
+	    				 	</execution>
+	    				 </executions>
+	    			</plugin>
+	    			<plugin> <!-- It's a common problem and a possible bug for wildfly -->
+					    <artifactId>maven-surefire-plugin</artifactId>
+					    <version>2.12</version>
+					    <configuration>
+					    	<systemProperties>
+					        	<property>
+					          		<name>java.util.logging.manager</name>
+					          		<value>org.jboss.logmanager.LogManager</value>
+					        	</property>
+					      	</systemProperties>
+					    </configuration>
+					</plugin>
+	    		</plugins>
+	    	</build>
     		<dependencies>
     			<dependency>
 		            <groupId>org.jboss.spec</groupId>
@@ -120,12 +168,18 @@
 		            <type>pom</type>
 		            <scope>provided</scope>
 		        </dependency>
-		        <dependency>
+		        <!-- dependency>
 		            <groupId>org.jboss.as</groupId>
 		            <artifactId>jboss-as-arquillian-container-managed</artifactId>
 		            <version>7.1.1.Final</version>
 		            <scope>test</scope>
-		        </dependency>
+		        </dependency -->
+		        <dependency>
+			  		<groupId>org.wildfly.arquillian</groupId>
+			  		<artifactId>wildfly-arquillian-container-embedded</artifactId>
+			  		<version>1.1.0.Final</version>
+			  		<scope>test</scope>
+				</dependency>
 		        <dependency>
 		            <groupId>org.jboss.arquillian.protocol</groupId>
 		            <artifactId>arquillian-protocol-servlet</artifactId>
