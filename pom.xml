@@ -111,7 +111,7 @@
     	</profile>
     	
     	<profile>
-    		<id>jboss-managed</id>
+    		<id>widlfly-managed</id>
     		<build>
 	    		<plugins>
 	    			<plugin>
@@ -178,6 +178,30 @@
 			  		<groupId>org.wildfly.arquillian</groupId>
 			  		<artifactId>wildfly-arquillian-container-managed</artifactId>
 			  		<version>1.1.0.Final</version>
+			  		<scope>test</scope>
+				</dependency>
+		        <dependency>
+		            <groupId>org.jboss.arquillian.protocol</groupId>
+		            <artifactId>arquillian-protocol-servlet</artifactId>
+		            <scope>test</scope>
+		        </dependency>
+    		</dependencies>
+    	</profile>
+    	
+    	<profile>
+    		<id>widlfly-remote</id>
+    		<dependencies>
+    			<dependency>
+		            <groupId>org.jboss.spec</groupId>
+		            <artifactId>jboss-javaee-6.0</artifactId>
+		            <version>1.0.0.Final</version>
+		            <type>pom</type>
+		            <scope>provided</scope>
+		        </dependency>
+		        <dependency>
+			  		<groupId>org.wildfly</groupId>
+			  		<artifactId>wildfly-arquillian-container-remote</artifactId>
+			  		<version>8.2.1.Final</version>
 			  		<scope>test</scope>
 				</dependency>
 		        <dependency>
