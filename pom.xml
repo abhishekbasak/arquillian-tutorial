@@ -111,7 +111,7 @@
     	</profile>
     	
     	<profile>
-    		<id>jboss-managed</id>
+    		<id>widlfly-managed</id>
     		<build>
 	    		<plugins>
 	    			<plugin>
